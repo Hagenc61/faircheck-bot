@@ -2,10 +2,12 @@ import os
 import threading
 import time
 import tweepy
-from flask import Flask, jsonify
+from flask import Flask, jsonify, request
+from ifab_engine import analyze_text, format_reply
 
 app = Flask(__name__)
 POLL_SECONDS = int(os.environ.get("POLL_SECONDS", "30"))
+ENABLE_X_POLLING = os.environ.get("ENABLE_X_POLLING", "false").lower() == "true"
 
 
 def make_client():
@@ -32,6 +34,10 @@ def bot_loop():
         print(f"FairCheck X connection failed: {type(exc).__name__}: {exc}", flush=True)
         return
 
+    if not ENABLE_X_POLLING:
+        print("X mention polling disabled (ENABLE_X_POLLING=false). No paid mention reads will be made.", flush=True)
+        return
+
     last_id = None
     while True:
         try:
@@ -47,13 +53,10 @@ def bot_loop():
                 last_id = tweet.id
                 if tweet.author_id == bot_id:
                     continue
-                reply = (
-                    "⚽ FairCheck bağlantısı aktif.\n\n"
-                    "Pozisyonu IFAB kurallarına göre değerlendirebilmem için "
-                    "pozisyon videosunu veya görselini bu gönderiye ekleyin."
-                )
+                result = analyze_text(tweet.text)
+                reply = format_reply(result)
                 client.create_tweet(text=reply, in_reply_to_tweet_id=tweet.id, user_auth=True)
-                print(f"Replied to tweet {tweet.id}", flush=True)
+                print(f"Replied to tweet {tweet.id}: {result['decision']}", flush=True)
         except Exception as exc:
             print(f"X polling error: {type(exc).__name__}: {exc}", flush=True)
         time.sleep(POLL_SECONDS)
@@ -67,6 +70,16 @@ def health():
 @app.get("/health")
 def health_check():
     return jsonify({"status": "ok"})
+
+
+@app.post("/analyze")
+def analyze():
+    data = request.get_json(silent=True) or {}
+    text = data.get("text", "")
+    if not isinstance(text, str):
+        return jsonify({"error": "text must be a string"}), 400
+    result = analyze_text(text)
+    return jsonify({"result": result, "reply": format_reply(result)})
 
 
 @app.get("/callback")

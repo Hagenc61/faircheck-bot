@@ -20,32 +20,45 @@ LAWS = {
     17: "The Corner Kick",
 }
 
-LAW_EXPLANATIONS = {
-    1: "Sahanın ölçüleri, çizgileri, ceza alanları, kale alanı, köşe alanı, kaleler, bayraklar ve teknik alanla ilgili hükümleri düzenler.",
-    2: "Topun ölçüleri ve özellikleri ile topun kusurlanması veya oyun sırasında değiştirilmesi ve ilave topların kullanımıyla ilgili hükümleri düzenler.",
-    3: "Oyuncu sayısı, kaptan, yedek oyuncular, oyuncu değişiklikleri, kalecinin değişmesi, izinsiz giriş ve oyundan ihraç edilen oyuncularla ilgili hükümleri düzenler.",
-    4: "Forma, şort, çorap, tekmelik, krampon, takı ve diğer zorunlu/izin verilen oyuncu ekipmanları ile güvenlik ve renk kurallarını düzenler.",
-    5: "Hakemin maç üzerindeki yetkileri, kararları, avantaj uygulaması, disiplin yetkisi, sakatlık yönetimi ve maçın yönetimiyle ilgili hükümleri düzenler.",
-    6: "Yardımcı hakem, dördüncü hakem, ilave yardımcı hakemler, VAR ve AVAR gibi diğer maç görevlilerinin görev ve sorumluluklarını düzenler.",
-    7: "Maçın iki eşit devresi, devre arası, kayıp zaman ve uzatma süreleriyle ilgili hükümleri düzenler.",
-    8: "Başlama vuruşu, devre başlangıcı ve gol sonrası başlama ile hakem atışı gibi yeniden başlatma yöntemlerini düzenler.",
-    9: "Topun ne zaman oyunda ve ne zaman oyun dışında olduğunu belirler. Topun tamamen taç veya kale çizgisini geçmesi gibi durumlar bu kapsamda değerlendirilir.",
-    10: "Golün geçerliliği, kazanan takımın belirlenmesi, eşitlik durumları ve seri penaltı vuruşlarıyla maç sonucunun belirlenmesini düzenler.",
-    11: "Ofsayt pozisyonunu ve ofsayt ihlalini düzenler. Sadece ofsayt pozisyonunda bulunmak ihlal değildir; oyuncunun aktif oyuna müdahalesi değerlendirilir.",
-    12: "Fauller, elle oynama, dikkatsiz/kontrolsüz/aşırı kuvvetli müdahaleler, sportmenlik dışı davranışlar, sarı ve kırmızı kart gerektiren ihlaller ile disiplin hükümlerini düzenler.",
-    13: "Direkt ve endirekt serbest vuruşların ne zaman verileceğini, uygulama yöntemini, rakiplerin mesafesini ve doğrudan gol olup olamayacağını düzenler.",
-    14: "Penaltı vuruşunun ne zaman verileceğini, vuruşun uygulanışını, kaleci ve diğer oyuncuların konumunu, ihlaller ve tekrar durumlarını düzenler.",
-    15: "Topun taçtan oyuna sokulması, oyuncunun konumu, iki elle atış, topun başın arkasından getirilmesi ve taç atışındaki ihlallerle ilgili hükümleri düzenler.",
-    16: "Topun hücum oyuncusu tarafından kale çizgisini tamamen geçirmesi ve son temasın hücum takımında olması gibi durumlarda kale vuruşunun uygulanmasını düzenler.",
-    17: "Topun savunma takımının oyuncusuna son kez temas ederek kale çizgisini tamamen geçmesi halinde kornerin uygulanmasını ve kornerdeki ihlalleri düzenler.",
+# Concise paraphrases of the current IFAB 2026/27 sub-sections.
+SUBRULES = {
+    1: {"default": ("1.1–1.11", "Sahanın yüzeyi, çizgileri, ölçüleri, kale/ceza alanları, köşe alanı, bayraklar, teknik alan ve kalelerle ilgili hükümler." )},
+    2: {"default": ("2.1–2.2", "Topun özellikleri, ölçüleri ve maç sırasında topun uygunluğuyla ilgili hükümler." )},
+    3: {"default": ("3.1–3.8", "Oyuncu sayısı, kaptan, oyuncu değişiklikleri, değiştirilen oyuncular, kalecinin değişimi, saha dışındaki oyuncu ve takım görevlileriyle ilgili hükümler." )},
+    4: {"default": ("4.1–4.6", "Temel ve zorunlu ekipman, forma renkleri, takılar ve diğer ekipman güvenliğiyle ilgili hükümler." )},
+    5: {"default": ("5.1–5.9", "Hakemin yetkileri, kararları, avantaj uygulaması, disiplin yetkisi, sakatlıklar ve maçın yönetimiyle ilgili hükümler." )},
+    6: {"default": ("6.1–6.12", "Yardımcı hakemler, dördüncü hakem, VAR ve AVAR'ın görevleri ile hakeme yardımcı olma hükümleri." )},
+    7: {"default": ("7.1–7.5", "Maçın devreleri, devre arası, kayıp zaman ve uzatma süresinin belirlenmesiyle ilgili hükümler." )},
+    8: {"default": ("8.1–8.3", "Başlama vuruşu, hakem atışı ve diğer yeniden başlatma yöntemlerinin uygulanması." )},
+    9: {"default": ("9.1–9.2", "Topun tamamen oyun alanını terk etmesi, oyun dışı kalması ve hakem/top temasının oyuna etkisi." )},
+    10: {"default": ("10.1–10.3", "Golün belirlenmesi, kazanan takım ve penaltı vuruşları serisiyle maç sonucunun belirlenmesi." )},
+    11: {
+        "default": ("11.1–11.4", "Ofsayt pozisyonu, ofsayt ihlali, ihlal olmayan durumlar ve yaptırımlar."),
+        "offside": ("11.1–11.4", "Oyuncunun topun oynandığı anda ofsayt pozisyonunda olup olmadığı; oyuna, rakibe veya avantaj elde etmeye müdahale edip etmediği değerlendirilir."),
+    },
+    12: {
+        "default": ("12.1–12.5", "Direkt/endirekt serbest vuruş gerektiren ihlaller, disiplin cezaları ve faul sonrası oyunun yeniden başlatılması."),
+        "foul": ("12.1", "Temaslı müdahalelerde ihlalin dikkatsiz, kontrolsüz veya aşırı kuvvetli olup olmadığı değerlendirilir. Dikkatsiz müdahalede disiplin cezası gerekmez; kontrolsüz müdahale sarı kart, aşırı kuvvet kullanımı ise kırmızı kart gerektirebilir."),
+        "handball": ("12.1", "Elle oynama değerlendirmesinde topun elle/kol ile oynanması, kolun vücuda göre konumu ve ilgili istisnalar incelenir."),
+        "discipline": ("12.4", "Sarı/kırmızı kart değerlendirmesinde ihlalin niteliği, sportmenlik dışı davranış, ciddi faullü oyun, şiddetli hareket ve bariz gol şansının engellenmesi gibi kriterler incelenir."),
+        "dogso": ("12.4", "Bariz gol şansının engellenmesinde ihlalin yeri, kaleye uzaklık, hücum yönü, topu kontrol etme/elde etme ihtimali ve savunmacı sayısı gibi kriterler birlikte değerlendirilir."),
+    },
+    13: {"default": ("13.1–13.3", "Direkt ve endirekt serbest vuruş türleri, uygulama prosedürü ve ihlal/yaptırımlar." )},
+    14: {
+        "default": ("14.1–14.3", "Penaltı vuruşunun prosedürü, oyuncuların konumu, vuruşun uygulanması ve ihlal/yaptırımlar."),
+        "penalty": ("14.1–14.3", "Penaltının verilmesi Law 12'deki doğrudan serbest vuruş gerektiren ihlale dayanır; vuruşun uygulanışı, kalecinin ve diğer oyuncuların konumu ile ihlaller ayrıca kontrol edilir."),
+    },
+    15: {"default": ("15.1–15.2", "Taç atışının uygulanması, prosedür ve usulsüz taç atışındaki yaptırım." )},
+    16: {"default": ("16.1–16.2", "Kale vuruşunun uygulanması, topun konumu, rakiplerin konumu ve ihlal/yaptırımlar." )},
+    17: {"default": ("17.1–17.2", "Köşe vuruşunun uygulanması ve prosedür/ihlal hükümleri." )},
 }
 
 KEYWORDS = {
-    1: ["saha", "çizgi", "ceza alanı", "ceza sahası", "orta saha", "kale alanı", "field of play", "penalty area", "goal area"],
-    2: ["top", "futbol topu", "ball", "top patladı", "top bozuk", "ikinci top", "yedek top"],
-    3: ["oyuncu", "oyuncular", "yedek", "değişiklik", "oyuncu değişikliği", "substitute", "substitution", "kaptan", "captain", "7 oyuncu", "yedi oyuncu"],
-    4: ["forma", "krampon", "tekmelik", "takı", "kolye", "küpe", "ekipman", "equipment", "jewellery", "jewelry", "shin pad"],
-    5: ["hakem", "orta hakem", "hakemin kararı", "hakem ne yapmalı", "referee", "avantaj", "advantage", "düdük"],
+    1: ["saha", "çizgi", "ceza alanı", "ceza sahası", "field of play", "penalty area", "goal area"],
+    2: ["top", "futbol topu", "ball", "top patladı", "top bozuk"],
+    3: ["oyuncu", "yedek", "değişiklik", "oyuncu değişikliği", "substitute", "substitution", "kaptan", "captain"],
+    4: ["forma", "krampon", "tekmelik", "takı", "kolye", "küpe", "ekipman", "equipment", "jewellery", "jewelry"],
+    5: ["hakem", "orta hakem", "hakemin kararı", "referee", "avantaj", "advantage", "düdük"],
     6: ["yardımcı hakem", "dördüncü hakem", "var", "video hakem", "video yardımcı hakem", "assistant referee", "fourth official", "var referee"],
     7: ["süre", "uzatma", "devre", "ilk yarı", "ikinci yarı", "maç süresi", "time", "added time", "half-time", "half time"],
     8: ["başlama", "başlama vuruşu", "santra", "hakem atışı", "hava atışı", "restart", "kick-off", "kickoff", "dropped ball"],
@@ -81,6 +94,23 @@ def _find_laws(text: str):
     return [n for n, _ in sorted(scores.items(), key=lambda item: (-item[1], item[0]))]
 
 
+def _subrule_for(law, text):
+    t = (text or "").lower()
+    if law == 12:
+        if any(x in t for x in ["elle oynama", "el", "handball", "hand"]):
+            return SUBRULES[12]["handball"]
+        if any(x in t for x in ["kırmızı", "kirmizi", "red card", "sarı", "sari", "yellow card"]):
+            if any(x in t for x in ["dogso", "bariz gol şansı", "bariz gol"]):
+                return SUBRULES[12]["dogso"]
+            return SUBRULES[12]["discipline"]
+        return SUBRULES[12]["foul"]
+    if law == 11:
+        return SUBRULES[11]["offside"]
+    if law == 14:
+        return SUBRULES[14]["penalty"]
+    return SUBRULES[law]["default"]
+
+
 def analyze_text(text: str) -> dict:
     t = (text or "").strip()
     laws = _find_laws(t)
@@ -90,8 +120,9 @@ def analyze_text(text: str) -> dict:
         return {
             "decision": "GÖRÜNTÜ / DETAY GEREKLİ",
             "law": "IFAB Laws of the Game 2026/27",
-            "law_explanation": "IFAB'ın 17 oyun kuralının tamamı değerlendirme kapsamındadır. Sorunun hangi kurala ait olduğunu belirlemek için olayın ayrıntısı veya görüntüsü gerekir.",
-            "reason": "Sorunun hangi oyun kuralına ait olduğu metinden kesin olarak belirlenemedi. Pozisyonun videosunu/görselini veya olayı daha ayrıntılı paylaşın.",
+            "subrule": "Genel",
+            "explanation": "Sorunun hangi oyun kuralına ait olduğu metinden kesin olarak belirlenemedi.",
+            "reason": "Pozisyonun videosunu/görselini veya olayı daha ayrıntılı paylaşın.",
             "confidence": "DÜŞÜK",
             "laws": list(LAWS.keys()),
             "var_relevant": has_var,
@@ -102,26 +133,25 @@ def analyze_text(text: str) -> dict:
     if has_var:
         law_text += " / VAR protokolü"
 
-    explanations = " ".join(LAW_EXPLANATIONS[n] for n in primary)
+    subrule_no, explanation = _subrule_for(primary[0], t)
 
     if 11 in primary:
-        reason = "Ofsayt değerlendirmesinde topun oynandığı an, ikinci son rakibin konumu, hücum oyuncusunun ofsayt pozisyonu ve aktif oyuna müdahalesi değerlendirilmelidir. Görüntü olmadan kesin karar verilmez."
+        reason = "Ofsayt için topun oynandığı an, oyuncunun konumu ve oyuna/rakibe etkisi görüntü üzerinden kontrol edilmelidir."
     elif 14 in primary:
-        reason = "Penaltı değerlendirmesinde ihlalin ceza alanı içinde olup olmadığı ve doğrudan serbest vuruş gerektiren bir ihlal bulunup bulunmadığı incelenmelidir. Penaltı vuruşunun uygulanışında Law 14 kriterleri ayrıca kontrol edilir."
+        reason = "Penaltı için önce Law 12 kapsamında ihlal olup olmadığı ve ihlalin ceza alanı içinde gerçekleşip gerçekleşmediği kontrol edilmelidir; ardından Law 14 prosedürü uygulanır."
     elif 12 in primary:
-        reason = "Faul ve disiplin değerlendirmesinde temas, müdahalenin niteliği, dikkatsiz/kontrolsüz/aşırı kuvvet kullanımı, ihlalin yeri ve gerekiyorsa kart veya DOGSO kriterleri birlikte değerlendirilmelidir."
-    elif 8 in primary:
-        reason = "Başlama ve yeniden başlatma şekli, topun ve oyuncuların konumu ile yeniden başlatmanın türü Law 8 hükümlerine göre kontrol edilmelidir."
+        reason = "Temasın niteliği, müdahalenin dikkatsiz/kontrolsüz/aşırı kuvvetli olup olmadığı ve varsa disiplin kriterleri birlikte değerlendirilmelidir."
     else:
-        reason = "Olay birden fazla IFAB kuralını ilgilendirebilir. İlgili Law'lar birlikte değerlendirilmelidir; kesin görsel karar için pozisyon görüntüsü gerekir."
+        reason = "Olayın ilgili Law ve alt hükümleri birlikte değerlendirilmelidir. Kesin görsel karar için pozisyon görüntüsü gerekir."
 
     if has_var:
-        reason += " VAR söz konusuysa yalnızca protokolde incelemeye açık olaylar ve ilgili müdahale kriterleri ayrıca kontrol edilmelidir."
+        reason += " VAR varsa ilgili olayın VAR protokolü kapsamında incelemeye uygun olup olmadığı ayrıca kontrol edilmelidir."
 
     return {
         "decision": "GÖRÜNTÜ GEREKLİ",
         "law": law_text,
-        "law_explanation": explanations,
+        "subrule": subrule_no,
+        "explanation": explanation,
         "reason": reason,
         "confidence": "DÜŞÜK",
         "laws": primary,
@@ -134,8 +164,9 @@ def format_reply(result: dict) -> str:
         "⚽ FAIR CHECK\n\n"
         f"Karar: {result['decision']}\n"
         f"📖 {result['law']}\n"
-        f"📚 Kural açıklaması: {result['law_explanation']}\n\n"
-        f"Gerekçe: {result['reason']}\n\n"
+        f"📌 Alt kural: {result['subrule']}\n\n"
+        f"📚 Kural açıklaması: {result['explanation']}\n\n"
+        f"🔎 Değerlendirme: {result['reason']}\n\n"
         f"Güven: {result['confidence']}\n"
-        "ℹ️ FairCheck, IFAB Laws of the Game 2026/27 çerçevesinde ilgili kural(lar)ı belirler. Metin tek başına kesin görsel hakem kararı için yeterli değildir."
+        "ℹ️ FairCheck, IFAB Laws of the Game 2026/27 çerçevesinde ilgili kural ve alt hükümleri eşleştirir. Metin tek başına kesin görsel hakem kararı için yeterli değildir."
     )

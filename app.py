@@ -72,12 +72,17 @@ def health_check():
     return jsonify({"status": "ok"})
 
 
-@app.post("/analyze")
+@app.route("/analyze", methods=["GET", "POST"])
 def analyze():
-    data = request.get_json(silent=True) or {}
-    text = data.get("text", "")
-    if not isinstance(text, str):
-        return jsonify({"error": "text must be a string"}), 400
+    if request.method == "GET":
+        text = request.args.get("text", "")
+    else:
+        data = request.get_json(silent=True) or {}
+        text = data.get("text", "")
+
+    if not isinstance(text, str) or not text.strip():
+        return jsonify({"error": "text is required"}), 400
+
     result = analyze_text(text)
     return jsonify({"result": result, "reply": format_reply(result)})
 

@@ -11,6 +11,14 @@ def health():
 def health_check():
     return jsonify({"status": "ok"})
 
+@app.get("/callback")
+def callback():
+    # OAuth callback endpoint. Full X OAuth flow will be added next.
+    return jsonify({
+        "service": "FairCheck",
+        "message": "X OAuth callback endpoint is ready."
+    })
+
 @app.post("/webhook")
 def webhook():
     data = request.get_json(silent=True) or {}
